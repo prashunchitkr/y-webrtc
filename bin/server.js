@@ -11,6 +11,7 @@ const wsReadyStateClosed = 3 // eslint-disable-line
 
 const pingTimeout = 30000
 
+const host = process.env.HOST || "localhost"
 const port = process.env.PORT || 4444
 // @ts-ignore
 const wss = new ws.Server({ noServer: true })
@@ -134,6 +135,6 @@ server.on('upgrade', (request, socket, head) => {
   wss.handleUpgrade(request, socket, head, handleAuth)
 })
 
-server.listen(port)
+server.listen(port, host)
 
-console.log('Signaling server running on localhost:', port)
+console.log(`Signaling server running on {host}:{port}`)
